@@ -34,17 +34,10 @@ imMip = max(imData,[],3);
 %% normalize pixel intensities
 normImBefore = (imMip-min(min(imMip)))/max(max(imMip));
 adjIm = imadjust(normImBefore);
-medIm = medfilt2(adjIm);
+medIm = medfilt2(adjIm,[3 3]);
 htIm = adapthisteq(medIm);
-ftIm = medfilt2(htIm);
+ftIm = medfilt2(htIm,[3 3]);
 imDataOut = ftIm;
 
-% %% optional show image
-% if verbose >= 2
-% 	figure, imshow(imDataOut);
-% 	title([imgFile ' (MIP, Norm.)'],'Interpreter','none')
-% end
-
-
-end
+end % end function
 
